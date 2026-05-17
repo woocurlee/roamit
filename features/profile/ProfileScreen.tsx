@@ -63,12 +63,12 @@ export function ProfileScreen() {
             </div>
           </div>
           <div className="text-center md:text-left">
-            <span className="mb-2 block text-[11px] font-semibold uppercase tracking-widest text-[#aac7ff]">
+            <span className="mb-2 block text-[11px] font-semibold uppercase tracking-widest text-blue-600 dark:text-[#aac7ff]">
               Premium Explorer
             </span>
             <h2 className="font-heading text-[26px] font-semibold leading-tight">
               정우{" "}
-              <span className="text-[#aac7ff]/70">탐험가</span>
+              <span className="text-blue-400 dark:text-[#aac7ff]/70">탐험가</span>
             </h2>
             <p className="mt-1 text-sm text-slate-500 dark:text-white/50">도시의 밤을 기록하는 서울의 방랑자</p>
           </div>
@@ -98,7 +98,7 @@ export function ProfileScreen() {
       <section className="mb-10">
         <div className="mb-5 flex items-center justify-between">
           <h3 className="font-semibold">획득한 뱃지</h3>
-          <button className="text-xs text-[#aac7ff]">전체 보기</button>
+          <button className="text-xs text-blue-600 dark:text-[#aac7ff]">전체 보기</button>
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           {badges.map(({ label, desc, icon: Icon, color, bg, locked }) => (

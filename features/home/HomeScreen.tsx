@@ -27,13 +27,13 @@ export function HomeScreen() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#111317] via-[#111317]/50 to-transparent" />
         <div className="relative z-10">
-          <span className="mb-5 inline-block rounded-full border border-[#aac7ff]/25 bg-[#aac7ff]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#aac7ff]">
+          <span className="mb-5 inline-block rounded-full border border-[#aac7ff]/30 bg-[#aac7ff]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#aac7ff]">
             City Explorer
           </span>
-          <h2 className="mb-3 font-heading text-[26px] font-semibold leading-snug tracking-tight text-slate-900 dark:text-white">
+          <h2 className="mb-3 font-heading text-[26px] font-semibold leading-snug tracking-tight text-white">
             오늘 밤, 서울의<br />새로운 맥박을 찾아보세요.
           </h2>
-          <p className="mb-8 text-sm leading-relaxed text-slate-500 dark:text-white/50">
+          <p className="mb-8 text-sm leading-relaxed text-white/60">
             목적지 없는 여정이 가장 특별한 이야기를 만듭니다.
           </p>
           <button
@@ -79,7 +79,7 @@ export function HomeScreen() {
           </div>
           <button
             onClick={() => router.push("/logs")}
-            className="flex items-center text-xs text-[#aac7ff]"
+            className="flex items-center text-xs text-blue-600 dark:text-[#aac7ff]"
           >
             전체보기 <ChevronRight size={14} />
           </button>

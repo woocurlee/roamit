@@ -35,7 +35,7 @@ export function CollectionScreen() {
     <div>
       {/* Hero */}
       <section className="mb-10">
-        <span className="mb-3 inline-block text-[11px] font-semibold uppercase tracking-widest text-[#aac7ff]">
+        <span className="mb-3 inline-block text-[11px] font-semibold uppercase tracking-widest text-blue-600 dark:text-[#aac7ff]">
           Adventure Progress
         </span>
         <h2 className="font-heading text-[26px] font-semibold tracking-tight">나의 컬렉션</h2>
@@ -89,7 +89,7 @@ export function CollectionScreen() {
       <section>
         <div className="mb-6 flex items-center justify-between">
           <h3 className="font-semibold">수집된 스테이션 뱃지</h3>
-          <button className="text-xs text-[#aac7ff]">전체 보기</button>
+          <button className="text-xs text-blue-600 dark:text-[#aac7ff]">전체 보기</button>
         </div>
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6">
           {visitedBadges.map((badge) => (
@@ -137,7 +137,7 @@ export function CollectionScreen() {
           </div>
           <div className="flex items-center justify-center gap-6">
             <div className="flex flex-col items-center">
-              <span className="font-heading text-2xl font-bold text-[#aac7ff]">{completion}%</span>
+              <span className="font-heading text-2xl font-bold text-blue-600 dark:text-[#aac7ff]">{completion}%</span>
               <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 dark:text-white/40">Completion</span>
             </div>
             <div className="h-8 w-px bg-black/10 dark:bg-white/10" />

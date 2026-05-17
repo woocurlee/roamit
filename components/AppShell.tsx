@@ -24,8 +24,8 @@ export function AppShell({ children }: Props) {
 
       <header className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between border-b border-black/5 bg-[#F7F8FC]/80 px-5 backdrop-blur-xl dark:border-white/8 dark:bg-[#111317]/80 lg:px-10">
         <div className="flex items-center gap-2">
-          <Train size={18} className="text-[#aac7ff]" />
-          <span className="font-heading text-lg font-bold tracking-tight text-[#aac7ff]">Roamit</span>
+          <Train size={18} className="text-blue-600 dark:text-[#aac7ff]" />
+          <span className="font-heading text-lg font-bold tracking-tight text-blue-600 dark:text-[#aac7ff]">Roamit</span>
         </div>
         <div className="flex items-center gap-2">
           <button className="rounded-full p-2 text-slate-400 transition hover:bg-black/5 dark:text-white/40 dark:hover:bg-white/10">
