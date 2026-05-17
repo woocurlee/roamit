@@ -10,10 +10,10 @@ export const placeTypes: { key: string; label: string; icon: IconComponent }[] =
   { key: "walk", label: "산책", icon: Trees },
 ];
 
-export const tabs: { key: string; label: string; icon: IconComponent }[] = [
-  { key: "home", label: "홈", icon: Home },
-  { key: "random", label: "뽑기", icon: Shuffle },
-  { key: "logs", label: "기록", icon: BookOpen },
-  { key: "collection", label: "수집", icon: Map },
-  { key: "profile", label: "내 정보", icon: User },
+export const tabs: { key: string; label: string; icon: IconComponent; href: string }[] = [
+  { key: "home", label: "홈", icon: Home, href: "/" },
+  { key: "random", label: "뽑기", icon: Shuffle, href: "/random" },
+  { key: "logs", label: "기록", icon: BookOpen, href: "/logs" },
+  { key: "collection", label: "수집", icon: Map, href: "/collection" },
+  { key: "profile", label: "내 정보", icon: User, href: "/profile" },
 ];

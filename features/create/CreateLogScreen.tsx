@@ -1,20 +1,15 @@
 "use client";
 
-import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Camera, Plus, Star, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LineBadge } from "@/components/LineBadge";
+import { useApp } from "@/context/AppContext";
 import { placeTypes } from "@/mock/config";
 import { createExploration } from "@/services/explorationService";
-import type { Exploration, PlaceReview, Station } from "@/types";
-
-type Props = {
-  selectedStation: Station | null;
-  setExplorations: Dispatch<SetStateAction<Exploration[]>>;
-  setCurrentTab: (tab: string) => void;
-};
+import type { PlaceReview } from "@/types";
 
 const makePlace = (): PlaceReview => ({
   id: `draft-${Date.now()}`,
@@ -26,7 +21,9 @@ const makePlace = (): PlaceReview => ({
   priceRange: "₩₩",
 });
 
-export function CreateLogScreen({ selectedStation, setExplorations, setCurrentTab }: Props) {
+export function CreateLogScreen() {
+  const router = useRouter();
+  const { selectedStation, setExplorations } = useApp();
   const [summaryMemo, setSummaryMemo] = useState("");
   const [places, setPlaces] = useState<PlaceReview[]>([
     { ...makePlace(), id: "draft-1", type: "restaurant", typeLabel: "식당" },
@@ -43,7 +40,7 @@ export function CreateLogScreen({ selectedStation, setExplorations, setCurrentTa
   const save = () => {
     if (!selectedStation) return;
     setExplorations((prev) => [createExploration(selectedStation, summaryMemo, places), ...prev]);
-    setCurrentTab("logs");
+    router.push("/logs");
   };
 
   return (

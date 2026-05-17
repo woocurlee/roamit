@@ -1,16 +1,17 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { tabs } from "@/mock/config";
 
 type Props = {
-  currentTab: string;
-  setCurrentTab: (tab: string) => void;
   children: ReactNode;
 };
 
-export function AppShell({ currentTab, setCurrentTab, children }: Props) {
+export function AppShell({ children }: Props) {
+  const pathname = usePathname();
+
   return (
     <div className="min-h-screen bg-[#090B12] text-white">
       <div className="fixed inset-0 overflow-hidden">
@@ -20,35 +21,25 @@ export function AppShell({ currentTab, setCurrentTab, children }: Props) {
       </div>
 
       <main className="relative mx-auto min-h-screen max-w-md px-5 pb-28 pt-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentTab}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22 }}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        {children}
       </main>
 
       <nav className="fixed bottom-4 left-1/2 z-50 w-[calc(100%-32px)] max-w-md -translate-x-1/2 rounded-3xl border border-white/10 bg-black/60 px-2 py-2 shadow-2xl backdrop-blur-xl">
         <div className="grid grid-cols-5 gap-1">
           {tabs.map((tab) => {
             const Icon = tab.icon;
-            const active = currentTab === tab.key;
+            const active = pathname === tab.href;
             return (
-              <button
+              <Link
                 key={tab.key}
-                onClick={() => setCurrentTab(tab.key)}
+                href={tab.href}
                 className={`flex flex-col items-center justify-center rounded-2xl py-2 text-[11px] transition ${
                   active ? "bg-white text-black" : "text-white/55 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 <Icon size={18} />
                 <span className="mt-1">{tab.label}</span>
-              </button>
+              </Link>
             );
           })}
         </div>

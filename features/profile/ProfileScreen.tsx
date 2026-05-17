@@ -1,15 +1,14 @@
+"use client";
+
 import { Trophy, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { StatCard } from "@/components/StatCard";
-import type { Exploration } from "@/types";
+import { useApp } from "@/context/AppContext";
 
 const badges = ["첫 탐험", "5개 역 방문", "10개 역 방문", "한 노선 3개 역 방문"];
 
-type Props = {
-  explorations: Exploration[];
-};
-
-export function ProfileScreen({ explorations }: Props) {
+export function ProfileScreen() {
+  const { explorations } = useApp();
   const placeCount = explorations.reduce((sum, e) => sum + e.places.length, 0);
 
   return (

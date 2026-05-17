@@ -1,17 +1,16 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LineBadge } from "@/components/LineBadge";
-import type { Station } from "@/types";
+import { useApp } from "@/context/AppContext";
 
-type Props = {
-  selectedStation: Station | null;
-  setCurrentTab: (tab: string) => void;
-};
+export function ActiveScreen() {
+  const router = useRouter();
+  const { selectedStation } = useApp();
 
-export function ActiveScreen({ selectedStation, setCurrentTab }: Props) {
   return (
     <div>
       <h1 className="text-2xl font-bold">탐험 진행 중</h1>
@@ -34,7 +33,7 @@ export function ActiveScreen({ selectedStation, setCurrentTab }: Props) {
             <div className="text-white/60">먼저 랜덤 역을 선택해주세요.</div>
           )}
           <Button
-            onClick={() => setCurrentTab("create")}
+            onClick={() => router.push("/create")}
             disabled={!selectedStation}
             className="mt-6 h-12 w-full rounded-2xl bg-white text-black hover:bg-white/90 disabled:opacity-40"
           >

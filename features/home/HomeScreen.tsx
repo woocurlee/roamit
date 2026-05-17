@@ -1,18 +1,16 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { ChevronRight, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExplorationCard } from "@/components/ExplorationCard";
 import { StatCard } from "@/components/StatCard";
-import type { Exploration } from "@/types";
+import { useApp } from "@/context/AppContext";
 
-type Props = {
-  explorations: Exploration[];
-  setCurrentTab: (tab: string) => void;
-};
-
-export function HomeScreen({ explorations, setCurrentTab }: Props) {
+export function HomeScreen() {
+  const router = useRouter();
+  const { explorations } = useApp();
   const placeCount = explorations.reduce((sum, e) => sum + e.places.length, 0);
 
   return (
@@ -38,7 +36,7 @@ export function HomeScreen({ explorations, setCurrentTab }: Props) {
             오늘의 장소를 찾아요.
           </h2>
           <Button
-            onClick={() => setCurrentTab("random")}
+            onClick={() => router.push("/random")}
             className="mt-7 h-12 w-full rounded-2xl bg-white text-black hover:bg-white/90"
           >
             <Shuffle className="mr-2" size={18} /> 랜덤 역 뽑기
@@ -55,7 +53,7 @@ export function HomeScreen({ explorations, setCurrentTab }: Props) {
       <div className="mt-8 flex items-center justify-between">
         <h3 className="text-lg font-semibold">최근 탐험</h3>
         <button
-          onClick={() => setCurrentTab("logs")}
+          onClick={() => router.push("/logs")}
           className="flex items-center text-sm text-white/55"
         >
           전체보기 <ChevronRight size={16} />

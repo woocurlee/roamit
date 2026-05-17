@@ -1,21 +1,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Play, RotateCcw, Train } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LineBadge } from "@/components/LineBadge";
+import { useApp } from "@/context/AppContext";
 import { filterStations, getRandomStation, getStations } from "@/services/stationService";
-import type { Station } from "@/types";
 
-type Props = {
-  selectedStation: Station | null;
-  setSelectedStation: (station: Station) => void;
-  setCurrentTab: (tab: string) => void;
-};
-
-export function RandomScreen({ selectedStation, setSelectedStation, setCurrentTab }: Props) {
+export function RandomScreen() {
+  const router = useRouter();
+  const { selectedStation, setSelectedStation } = useApp();
   const [isRolling, setIsRolling] = useState(false);
   const [excludeVisited, setExcludeVisited] = useState(true);
   const [lineFilter, setLineFilter] = useState("all");
@@ -95,7 +92,7 @@ export function RandomScreen({ selectedStation, setSelectedStation, setCurrentTa
           </Button>
           <Button
             disabled={!selectedStation || isRolling}
-            onClick={() => setCurrentTab("active")}
+            onClick={() => router.push("/explore")}
             className="mt-3 h-12 w-full rounded-2xl bg-emerald-400 text-black hover:bg-emerald-300 disabled:opacity-40"
           >
             <Play className="mr-2" size={18} /> 탐험 시작하기

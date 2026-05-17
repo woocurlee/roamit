@@ -1,11 +1,11 @@
+"use client";
+
 import { ExplorationCard } from "@/components/ExplorationCard";
-import type { Exploration } from "@/types";
+import { useApp } from "@/context/AppContext";
 
-type Props = {
-  explorations: Exploration[];
-};
+export function LogsScreen() {
+  const { explorations } = useApp();
 
-export function LogsScreen({ explorations }: Props) {
   return (
     <div>
       <h1 className="text-2xl font-bold">탐험 기록</h1>
