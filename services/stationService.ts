@@ -1,11 +1,12 @@
-import { stations } from "@/mock/stations";
 import type { Station } from "@/types";
 
-export function getStations(): Station[] {
-  return stations;
+export async function getStations(): Promise<Station[]> {
+  const res = await fetch("/api/stations");
+  if (!res.ok) throw new Error("Failed to fetch stations");
+  return res.json();
 }
 
-export function filterStations(excludeVisited: boolean, lineId: string): Station[] {
+export function filterStations(stations: Station[], excludeVisited: boolean, lineId: string): Station[] {
   return stations.filter(
     (s) => (!excludeVisited || !s.visited) && (lineId === "all" || s.lineId === lineId),
   );

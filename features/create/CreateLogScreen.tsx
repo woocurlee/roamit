@@ -37,9 +37,10 @@ export function CreateLogScreen() {
   const removePlace = (id: string) =>
     setPlaces((prev) => (prev.length === 1 ? prev : prev.filter((p) => p.id !== id)));
 
-  const save = () => {
+  const save = async () => {
     if (!selectedStation) return;
-    setExplorations((prev) => [createExploration(selectedStation, summaryMemo, places), ...prev]);
+    const exploration = await createExploration(selectedStation, summaryMemo, places);
+    setExplorations((prev) => [exploration, ...prev]);
     router.push("/logs");
   };
 

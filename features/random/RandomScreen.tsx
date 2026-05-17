@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Play, RotateCcw, Train } from "lucide-react";
@@ -9,24 +9,30 @@ import { Card, CardContent } from "@/components/ui/card";
 import { LineBadge } from "@/components/LineBadge";
 import { useApp } from "@/context/AppContext";
 import { filterStations, getRandomStation, getStations } from "@/services/stationService";
+import type { Station } from "@/types";
 
 export function RandomScreen() {
   const router = useRouter();
   const { selectedStation, setSelectedStation } = useApp();
+  const [stations, setStations] = useState<Station[]>([]);
   const [isRolling, setIsRolling] = useState(false);
   const [excludeVisited, setExcludeVisited] = useState(true);
   const [lineFilter, setLineFilter] = useState("all");
 
+  useEffect(() => {
+    getStations().then(setStations).catch(console.error);
+  }, []);
+
   const availableStations = useMemo(
-    () => filterStations(excludeVisited, lineFilter),
-    [excludeVisited, lineFilter],
+    () => filterStations(stations, excludeVisited, lineFilter),
+    [stations, excludeVisited, lineFilter],
   );
 
   const pickStation = () => {
     setIsRolling(true);
     setTimeout(() => {
-      const pool = availableStations.length ? availableStations : getStations();
-      setSelectedStation(getRandomStation(pool));
+      const pool = availableStations.length ? availableStations : stations;
+      if (pool.length) setSelectedStation(getRandomStation(pool));
       setIsRolling(false);
     }, 700);
   };

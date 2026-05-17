@@ -1,7 +1,15 @@
 "use client";
 
-import { createContext, useContext, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
-import { initialExplorations } from "@/mock/explorations";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
+import { getExplorations } from "@/services/explorationService";
 import type { Exploration, Station } from "@/types";
 
 type AppContextValue = {
@@ -15,7 +23,11 @@ const AppContext = createContext<AppContextValue | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [selectedStation, setSelectedStation] = useState<Station | null>(null);
-  const [explorations, setExplorations] = useState<Exploration[]>(initialExplorations);
+  const [explorations, setExplorations] = useState<Exploration[]>([]);
+
+  useEffect(() => {
+    getExplorations().then(setExplorations).catch(console.error);
+  }, []);
 
   return (
     <AppContext.Provider value={{ selectedStation, setSelectedStation, explorations, setExplorations }}>
