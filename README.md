@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Roamit
 
-## Getting Started
+서울 지하철역을 랜덤으로 뽑아 근처 동네를 탐험하고, 방문한 장소를 기록하는 모바일 앱입니다.
 
-First, run the development server:
+## 핵심 흐름
+
+**랜덤 역 뽑기 → 탐험 시작 → 장소 리뷰 작성 → 탐험 기록 저장 → 역 수집**
+
+## 기술 스택
+
+- **Next.js 16** (App Router) · **React 19** · **TypeScript**
+- **Tailwind CSS v4** · **shadcn/ui** (radix-nova)
+- **Framer Motion**
+
+## 시작하기
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`http://localhost:3000` 에서 확인할 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 주요 명령어
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # 개발 서버 실행
+npm run build    # 프로덕션 빌드
+npm run lint     # ESLint 실행
+```
 
-## Learn More
+## 프로젝트 구조
 
-To learn more about Next.js, take a look at the following resources:
+```
+types/          # 도메인 타입 (Station, Exploration, PlaceReview)
+mock/           # 목 데이터 및 앱 설정
+services/       # 서비스 레이어 (stationService, explorationService)
+components/     # 공유 UI 컴포넌트 (AppShell, ExplorationCard 등)
+features/       # 화면 단위 컴포넌트
+  home/         # 홈
+  random/       # 랜덤 역 뽑기
+  active/       # 탐험 진행 중
+  create/       # 탐험 기록 작성
+  logs/         # 탐험 기록 목록
+  collection/   # 역 수집 현황
+  profile/      # 내 정보
+app/            # Next.js App Router 진입점
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 현재 MVP 범위
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+백엔드 없이 목 데이터로 동작합니다. 인증, GPS 검증, 지도 연동, 소셜 기능은 미구현 상태이며 서비스 레이어를 통해 추후 API로 교체할 수 있는 구조입니다.
