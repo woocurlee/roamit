@@ -13,12 +13,12 @@ export function ProfileScreen() {
 
   return (
     <div>
-      <div className="rounded-[2rem] border border-white/10 bg-white/8 p-6 text-center shadow-2xl backdrop-blur">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white text-black">
+      <div className="rounded-[2rem] border border-black/8 bg-white p-6 text-center shadow-sm dark:border-white/10 dark:bg-white/8 dark:shadow-2xl">
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-slate-900 text-white dark:bg-white dark:text-black">
           <User size={34} />
         </div>
         <h1 className="mt-4 text-2xl font-bold">정우</h1>
-        <p className="mt-1 text-sm text-white/55">도시와 장소를 천천히 수집하는 중</p>
+        <p className="mt-1 text-sm text-slate-500 dark:text-white/55">도시와 장소를 천천히 수집하는 중</p>
       </div>
       <div className="mt-5 grid grid-cols-3 gap-3">
         <StatCard label="탐험" value={explorations.length} />
@@ -30,12 +30,18 @@ export function ProfileScreen() {
         {badges.map((badge, idx) => (
           <Card
             key={badge}
-            className={`border-white/10 ${idx === 0 ? "bg-emerald-400/15" : "bg-white/8"} text-white shadow-xl backdrop-blur`}
+            className={`border-black/8 dark:border-white/10 ${
+              idx === 0
+                ? "bg-emerald-50 dark:bg-emerald-400/15"
+                : "bg-white dark:bg-white/8"
+            } shadow-sm dark:shadow-xl`}
           >
             <CardContent className="p-4">
-              <Trophy className={idx === 0 ? "text-emerald-200" : "text-white/35"} />
+              <Trophy className={idx === 0 ? "text-emerald-500 dark:text-emerald-200" : "text-slate-300 dark:text-white/35"} />
               <div className="mt-3 text-sm font-semibold">{badge}</div>
-              <div className="mt-1 text-xs text-white/45">{idx === 0 ? "달성 완료" : "아직 잠김"}</div>
+              <div className="mt-1 text-xs text-slate-400 dark:text-white/45">
+                {idx === 0 ? "달성 완료" : "아직 잠김"}
+              </div>
             </CardContent>
           </Card>
         ))}

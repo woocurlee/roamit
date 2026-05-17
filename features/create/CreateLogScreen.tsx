@@ -47,9 +47,11 @@ export function CreateLogScreen() {
   return (
     <div>
       <h1 className="text-2xl font-bold">탐험 기록 작성</h1>
-      <p className="mt-2 text-sm text-white/55">한 번의 역 탐험 안에 여러 장소 리뷰를 남길 수 있어요.</p>
+      <p className="mt-2 text-sm text-slate-500 dark:text-white/55">
+        한 번의 역 탐험 안에 여러 장소 리뷰를 남길 수 있어요.
+      </p>
 
-      <Card className="mt-6 border-white/10 bg-white/8 text-white shadow-2xl backdrop-blur">
+      <Card className="mt-6 border-black/8 bg-white dark:border-white/10 dark:bg-white/8">
         <CardContent className="p-5">
           <div className="flex items-center justify-between">
             <div className="text-lg font-semibold">
@@ -60,7 +62,7 @@ export function CreateLogScreen() {
             )}
           </div>
 
-          <div className="mt-5 flex h-36 items-center justify-center rounded-3xl border border-dashed border-white/20 bg-white/5 text-white/55">
+          <div className="mt-5 flex h-36 items-center justify-center rounded-3xl border border-dashed border-black/15 bg-black/3 text-slate-400 dark:border-white/20 dark:bg-white/5 dark:text-white/55">
             <div className="text-center">
               <Camera className="mx-auto mb-2" />
               <div className="text-sm">대표 사진 추가</div>
@@ -71,7 +73,7 @@ export function CreateLogScreen() {
             value={summaryMemo}
             onChange={(e) => setSummaryMemo(e.target.value)}
             placeholder="오늘 이 역 근처는 어떤 느낌이었나요?"
-            className="mt-5 h-24 w-full resize-none rounded-3xl border border-white/10 bg-black/30 p-4 text-sm text-white outline-none placeholder:text-white/35"
+            className="mt-5 h-24 w-full resize-none rounded-3xl border border-black/10 bg-black/3 p-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/35"
           />
         </CardContent>
       </Card>
@@ -80,7 +82,7 @@ export function CreateLogScreen() {
         <h2 className="text-lg font-semibold">방문 장소</h2>
         <button
           onClick={addPlace}
-          className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-2 text-xs font-medium text-black"
+          className="inline-flex items-center gap-1 rounded-full bg-slate-900 px-3 py-2 text-xs font-medium text-white dark:bg-white dark:text-black"
         >
           <Plus size={14} /> 장소 추가
         </button>
@@ -88,14 +90,14 @@ export function CreateLogScreen() {
 
       <div className="mt-4 space-y-4">
         {places.map((place, index) => (
-          <Card key={place.id} className="border-white/10 bg-white/8 text-white shadow-xl backdrop-blur">
+          <Card key={place.id} className="border-black/8 bg-white dark:border-white/10 dark:bg-white/8">
             <CardContent className="p-5">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-semibold text-white/75">장소 {index + 1}</div>
+                <div className="text-sm font-semibold text-slate-500 dark:text-white/75">장소 {index + 1}</div>
                 <button
                   onClick={() => removePlace(place.id)}
                   disabled={places.length === 1}
-                  className="rounded-full bg-white/10 p-2 text-white/45 disabled:opacity-30"
+                  className="rounded-full bg-black/5 p-2 text-slate-400 disabled:opacity-30 dark:bg-white/10 dark:text-white/45"
                 >
                   <Trash2 size={15} />
                 </button>
@@ -105,7 +107,7 @@ export function CreateLogScreen() {
                 value={place.name}
                 onChange={(e) => updatePlace(place.id, { name: e.target.value })}
                 placeholder="장소명 입력"
-                className="mt-4 h-12 w-full rounded-2xl border border-white/10 bg-black/30 px-4 text-sm text-white outline-none placeholder:text-white/35"
+                className="mt-4 h-12 w-full rounded-2xl border border-black/10 bg-black/3 px-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/35"
               />
 
               <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
@@ -116,8 +118,10 @@ export function CreateLogScreen() {
                     <button
                       key={type.key}
                       onClick={() => updatePlace(place.id, { type: type.key, typeLabel: type.label })}
-                      className={`inline-flex shrink-0 items-center gap-1 rounded-full px-3 py-2 text-xs ${
-                        active ? "bg-white text-black" : "bg-white/10 text-white/65"
+                      className={`inline-flex shrink-0 items-center gap-1 rounded-full px-3 py-2 text-xs transition ${
+                        active
+                          ? "bg-slate-900 text-white dark:bg-white dark:text-black"
+                          : "bg-black/5 text-slate-600 dark:bg-white/10 dark:text-white/65"
                       }`}
                     >
                       <Icon size={13} /> {type.label}
@@ -130,18 +134,18 @@ export function CreateLogScreen() {
                 value={place.memo}
                 onChange={(e) => updatePlace(place.id, { memo: e.target.value })}
                 placeholder="이 장소는 어땠나요?"
-                className="mt-4 h-24 w-full resize-none rounded-3xl border border-white/10 bg-black/30 p-4 text-sm text-white outline-none placeholder:text-white/35"
+                className="mt-4 h-24 w-full resize-none rounded-3xl border border-black/10 bg-black/3 p-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/35"
               />
 
               <div className="mt-4 flex items-center justify-between">
                 <div>
-                  <div className="mb-2 text-xs text-white/50">만족도</div>
+                  <div className="mb-2 text-xs text-slate-500 dark:text-white/50">만족도</div>
                   <div className="flex gap-1">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <button
                         key={n}
                         onClick={() => updatePlace(place.id, { rating: n })}
-                        className={n <= place.rating ? "text-yellow-200" : "text-white/25"}
+                        className={n <= place.rating ? "text-yellow-500 dark:text-yellow-200" : "text-slate-300 dark:text-white/25"}
                       >
                         <Star fill="currentColor" size={20} />
                       </button>
@@ -149,11 +153,11 @@ export function CreateLogScreen() {
                   </div>
                 </div>
                 <div>
-                  <div className="mb-2 text-xs text-white/50">가격대</div>
+                  <div className="mb-2 text-xs text-slate-500 dark:text-white/50">가격대</div>
                   <select
                     value={place.priceRange}
                     onChange={(e) => updatePlace(place.id, { priceRange: e.target.value })}
-                    className="h-10 rounded-2xl border border-white/10 bg-black/40 px-3 text-sm text-white outline-none"
+                    className="h-10 rounded-2xl border border-black/10 bg-black/3 px-3 text-sm text-slate-900 outline-none dark:border-white/10 dark:bg-black/40 dark:text-white"
                   >
                     <option>₩</option>
                     <option>₩₩</option>
@@ -169,7 +173,7 @@ export function CreateLogScreen() {
       <Button
         onClick={save}
         disabled={!selectedStation}
-        className="mt-6 h-12 w-full rounded-2xl bg-white text-black hover:bg-white/90 disabled:opacity-40"
+        className="mt-6 h-12 w-full rounded-2xl bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-40 dark:bg-white dark:text-black dark:hover:bg-white/90"
       >
         탐험 기록 저장하기
       </Button>

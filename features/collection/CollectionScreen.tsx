@@ -12,29 +12,29 @@ export function CollectionScreen() {
   return (
     <div>
       <h1 className="text-2xl font-bold">역 수집</h1>
-      <p className="mt-2 text-sm text-white/55">방문한 역이 하나씩 채워져요.</p>
+      <p className="mt-2 text-sm text-slate-500 dark:text-white/55">방문한 역이 하나씩 채워져요.</p>
       <div className="mt-6 space-y-4">
         {lineGroups.map((line) => {
           const percent = Math.round((line.visited / line.total) * 100);
           return (
             <Card
               key={line.line}
-              className="border-white/10 bg-white/8 text-white shadow-xl backdrop-blur"
+              className="border-black/8 bg-white shadow-sm dark:border-white/10 dark:bg-white/8 dark:shadow-xl"
             >
               <CardContent className="p-5">
                 <div className="flex items-center justify-between">
                   <LineBadge lineName={line.line} lineColor={line.color} />
-                  <span className="text-sm text-white/55">
+                  <span className="text-sm text-slate-500 dark:text-white/55">
                     {line.visited}/{line.total}
                   </span>
                 </div>
-                <div className="mt-4 h-3 rounded-full bg-white/10">
+                <div className="mt-4 h-3 rounded-full bg-black/8 dark:bg-white/10">
                   <div
                     className="h-3 rounded-full"
                     style={{ width: `${percent}%`, backgroundColor: line.color }}
                   />
                 </div>
-                <div className="mt-3 text-sm text-white/60">완성도 {percent}%</div>
+                <div className="mt-3 text-sm text-slate-500 dark:text-white/60">완성도 {percent}%</div>
               </CardContent>
             </Card>
           );
