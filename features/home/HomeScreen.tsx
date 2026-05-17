@@ -20,8 +20,8 @@ export function HomeScreen() {
           <div className="text-sm text-slate-500 dark:text-white/55">오늘도 새로운 동네로</div>
           <h1 className="mt-1 text-3xl font-bold tracking-tight">Roamit</h1>
         </div>
-        <div className="rounded-full border border-black/10 bg-black/5 px-3 py-2 text-xs text-slate-600 dark:border-white/10 dark:bg-white/10 dark:text-white/70">
-          서울 탐험
+        <div className="rounded-full bg-gradient-to-r from-emerald-400 to-sky-400 px-4 py-2 text-xs font-medium text-white">
+          Seoul Explorer
         </div>
       </div>
 
