@@ -1,42 +1,10 @@
 "use client";
 
-import { ChevronRight, Moon, Train, Camera, Lock, TrainFront, Compass, Star, Trophy } from "lucide-react";
+import { ChevronRight, TrainFront, Compass, Star, Trophy } from "lucide-react";
+import Link from "next/link";
 import { useApp } from "@/context/AppContext";
+import { badges } from "@/mock/badges";
 
-const badges = [
-  {
-    label: "밤거리의 방랑자",
-    desc: "심야 탐험 10회 완료",
-    icon: Moon,
-    color: "#68df6e",
-    bg: "rgba(104,223,110,0.12)",
-    locked: false,
-  },
-  {
-    label: "메트로 매니아",
-    desc: "모든 호선 탑승 완료",
-    icon: Train,
-    color: "#aac7ff",
-    bg: "rgba(170,199,255,0.12)",
-    locked: false,
-  },
-  {
-    label: "도시의 시선",
-    desc: "포토스팟 50회 방문",
-    icon: Camera,
-    color: "#ffb692",
-    bg: "rgba(255,182,146,0.12)",
-    locked: false,
-  },
-  {
-    label: "퍼스트 클래스",
-    desc: "탐험 거리 1,000km 달성",
-    icon: Lock,
-    color: "#ffffff",
-    bg: "rgba(255,255,255,0.05)",
-    locked: true,
-  },
-];
 
 export function ProfileScreen() {
   const { explorations } = useApp();
@@ -102,18 +70,16 @@ export function ProfileScreen() {
       <section className="mb-10">
         <div className="mb-5 flex items-center justify-between">
           <h3 className="font-semibold">획득한 뱃지</h3>
-          <button className="text-xs text-blue-600 dark:text-[#aac7ff]">전체 보기</button>
+          <Link href="/badges" className="text-xs text-blue-600 dark:text-[#aac7ff]">전체 보기</Link>
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-          {badges.map(({ label, desc, icon: Icon, color, bg, locked }) => (
+          {badges.filter((b) => !b.locked).slice(0, 4).map(({ id, label, desc, icon: Icon, color, bg }) => (
             <div
-              key={label}
-              className={`flex flex-col items-center rounded-2xl border border-black/5 bg-white/60 p-4 text-center backdrop-blur-xl transition-all duration-300 dark:border-white/5 dark:bg-[#1e2024]/60 ${
-                locked ? "opacity-40 grayscale" : "hover:dark:bg-[#1e2024]/80"
-              }`}
+              key={id}
+              className="flex flex-col items-center rounded-2xl border border-black/5 bg-white/60 p-4 text-center backdrop-blur-xl transition-all duration-300 dark:border-white/5 dark:bg-[#1e2024]/60"
             >
               <div
-                className="mb-3 flex h-14 w-14 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110"
+                className="mb-3 flex h-14 w-14 items-center justify-center rounded-full"
                 style={{ background: bg }}
               >
                 <Icon size={26} style={{ color }} />
