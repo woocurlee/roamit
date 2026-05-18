@@ -1,19 +1,19 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ChevronRight, Shuffle, TrainFront, Compass, Star, Clock } from "lucide-react";
+import { ChevronRight, Shuffle, TrainFront, Compass, Star } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 
 export function HomeScreen() {
   const router = useRouter();
   const { explorations } = useApp();
+  const stationCount = new Set(explorations.map((e) => e.stationId)).size;
   const placeCount = explorations.reduce((sum, e) => sum + e.places.length, 0);
 
   const stats = [
-    { label: "방문한 역", value: "2", color: "#aac7ff", icon: TrainFront },
+    { label: "방문한 역", value: String(stationCount), color: "#aac7ff", icon: TrainFront },
     { label: "탐험 기록", value: String(explorations.length), color: "#68df6e", icon: Compass },
     { label: "장소 리뷰", value: String(placeCount), color: "#ffb692", icon: Star },
-    { label: "총 탐험 시간", value: "14h", color: "#aac7ff", icon: Clock },
   ];
 
   return (
@@ -52,7 +52,7 @@ export function HomeScreen() {
         <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-slate-400 dark:text-white/40">
           나의 탐험 통계
         </h3>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="grid grid-cols-3 gap-3">
           {stats.map(({ label, value, color, icon: Icon }) => (
             <div
               key={label}

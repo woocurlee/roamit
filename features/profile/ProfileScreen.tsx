@@ -1,13 +1,7 @@
 "use client";
 
-import { ChevronRight, Moon, Train, Camera, Lock, Route, CalendarDays, Trophy } from "lucide-react";
+import { ChevronRight, Moon, Train, Camera, Lock, TrainFront, Compass, Star, Trophy } from "lucide-react";
 import { useApp } from "@/context/AppContext";
-
-const statItems = [
-  { label: "총 탐험 거리", value: "428.5", unit: "km", icon: Route, color: "#68df6e" },
-  { label: "연속 탐험 일수", value: "14", unit: "일", icon: CalendarDays, color: "#ffb692" },
-  { label: "획득 뱃지", value: "24", unit: "개", icon: Trophy, color: "#aac7ff" },
-];
 
 const badges = [
   {
@@ -46,6 +40,16 @@ const badges = [
 
 export function ProfileScreen() {
   const { explorations } = useApp();
+  const stationCount = new Set(explorations.map((e) => e.stationId)).size;
+  const placeCount = explorations.reduce((sum, e) => sum + e.places.length, 0);
+  const badgeCount = badges.filter((b) => !b.locked).length;
+
+  const statItems = [
+    { label: "방문한 역", value: String(stationCount), unit: "개", icon: TrainFront, color: "#aac7ff" },
+    { label: "탐험 기록", value: String(explorations.length), unit: "회", icon: Compass, color: "#68df6e" },
+    { label: "장소 리뷰", value: String(placeCount), unit: "개", icon: Star, color: "#ffb692" },
+    { label: "획득 뱃지", value: String(badgeCount), unit: "개", icon: Trophy, color: "#aac7ff" },
+  ];
 
   return (
     <div>
@@ -76,7 +80,7 @@ export function ProfileScreen() {
       </section>
 
       {/* Stats */}
-      <section className="mb-10 grid grid-cols-3 gap-3">
+      <section className="mb-10 grid grid-cols-2 gap-3 md:grid-cols-4">
         {statItems.map(({ label, value, unit, icon: Icon, color }) => (
           <div
             key={label}
