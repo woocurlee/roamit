@@ -1,4 +1,4 @@
-import { BookOpen, Coffee, Home, Map, Shuffle, Store, Trees, User, Utensils } from "lucide-react";
+import { BookOpen, Coffee, Home, Map, Shuffle, Store, Trees, User, Utensils, Ticket } from "lucide-react";
 import type React from "react";
 
 type IconComponent = React.ComponentType<{ size?: number; className?: string }>;
@@ -8,6 +8,7 @@ export const placeTypes: { key: string; label: string; icon: IconComponent }[] =
   { key: "cafe", label: "카페", icon: Coffee },
   { key: "shop", label: "상점", icon: Store },
   { key: "walk", label: "산책", icon: Trees },
+  { key: "exhibition", label: "전시/공연", icon: Ticket },
 ];
 
 export const tabs: { key: string; label: string; icon: IconComponent; href: string }[] = [
