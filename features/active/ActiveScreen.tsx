@@ -21,7 +21,11 @@ export function ActiveScreen() {
         <CardContent className="p-6">
           {selectedStation ? (
             <>
-              <LineBadge lineName={selectedStation.lineName} lineColor={selectedStation.lineColor} />
+              <div className="flex flex-wrap gap-1.5">
+                {selectedStation.lines.map((l) => (
+                  <LineBadge key={l.lineId} lineName={l.lineName} lineColor={l.lineColor} />
+                ))}
+              </div>
               <div className="mt-4 text-4xl font-black">{selectedStation.name}역</div>
               <div className="mt-3 text-sm text-slate-500 dark:text-white/55">시작 시간 · 오늘 오후 2:30</div>
               <div className="mt-8 rounded-3xl bg-black/5 p-4 text-sm leading-6 text-slate-600 dark:bg-white/10 dark:text-white/70">

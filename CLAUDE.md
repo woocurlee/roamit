@@ -143,34 +143,53 @@ Examples:
 
 ---
 
-# Exploration Data Model
+# Data Model
 
-An Exploration represents:
-- one subway station exploration session
+## Station
+A station can serve multiple lines (환승역). `lines` is always a non-empty array.
 
-A Place Review represents:
-- one visited location during that exploration
+```
+Station
+- id
+- name
+- lines: StationLine[]   ← one entry per line passing through
+- visited
 
-Structure:
+StationLine
+- lineId
+- lineName
+- lineColor
+```
 
+## Exploration
+Snapshot of a single station visit. `lineName`/`lineColor` are the representative line at the time of recording (first entry of the station's `lines`).
+
+```
 Exploration
 - id
 - stationId
 - stationName
-- lineName
+- lineName       ← representative line (snapshot)
 - lineColor
 - summaryMemo
-- coverPhoto
 - visitedAt
-- places[]
+- photos: string[]
+- places: PlaceReview[]
+```
 
+## PlaceReview
+One visited location within an exploration.
+
+```
 PlaceReview
 - id
 - name
 - type
+- typeLabel
 - memo
 - rating
-- priceRange
+- photos: string[]
+```
 
 ---
 

@@ -87,8 +87,10 @@ export function RandomScreen() {
             {isRolling ? "선택 중..." : selectedStation ? `${selectedStation.name}역` : "아직 없음"}
           </motion.div>
           {selectedStation && !isRolling && (
-            <div className="mt-4">
-              <LineBadge lineName={selectedStation.lineName} lineColor={selectedStation.lineColor} />
+            <div className="mt-4 flex flex-wrap justify-center gap-1.5">
+              {selectedStation.lines.map((l) => (
+                <LineBadge key={l.lineId} lineName={l.lineName} lineColor={l.lineColor} />
+              ))}
             </div>
           )}
 

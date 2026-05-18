@@ -8,7 +8,7 @@ export async function getStations(): Promise<Station[]> {
 
 export function filterStations(stations: Station[], excludeVisited: boolean, lineId: string): Station[] {
   return stations.filter(
-    (s) => (!excludeVisited || !s.visited) && (lineId === "all" || s.lineId === lineId),
+    (s) => (!excludeVisited || !s.visited) && (lineId === "all" || s.lines.some((l) => l.lineId === lineId)),
   );
 }
 

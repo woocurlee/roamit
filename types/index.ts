@@ -1,9 +1,13 @@
-export type Station = {
-  id: string;
-  name: string;
+export type StationLine = {
   lineId: string;
   lineName: string;
   lineColor: string;
+};
+
+export type Station = {
+  id: string;
+  name: string;
+  lines: StationLine[];
   visited: boolean;
 };
 
