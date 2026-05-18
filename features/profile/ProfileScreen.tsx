@@ -131,8 +131,8 @@ export function ProfileScreen() {
               className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white/60 p-4 backdrop-blur-xl dark:border-white/5 dark:bg-[#1e2024]/60"
             >
               <div className="h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-black/5 dark:bg-white/5">
-                {e.coverPhoto && (
-                  <img src={e.coverPhoto} alt={e.stationName} className="h-full w-full object-cover" />
+                {e.photos[0] && (
+                  <img src={e.photos[0]} alt={e.stationName} className="h-full w-full object-cover" />
                 )}
               </div>
               <div className="flex-1 min-w-0">

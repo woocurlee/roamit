@@ -23,8 +23,7 @@ export async function createExploration(
     lineColor: station.lineColor,
     summaryMemo: summaryMemo || `${station.name}역 근처에서 ${normalized.length}곳을 둘러봤다.`,
     visitedAt,
-    coverPhoto:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=900&auto=format&fit=crop",
+    photos: [],
     places: normalized,
   };
 

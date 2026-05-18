@@ -11,10 +11,12 @@ type Props = {
 export function ExplorationCard({ exploration }: Props) {
   return (
     <Card className="overflow-hidden border-black/8 bg-white text-slate-900 shadow-sm dark:border-white/10 dark:bg-white/8 dark:text-white dark:shadow-xl">
-      <div
-        className="h-36 w-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${exploration.coverPhoto})` }}
-      />
+      {exploration.photos[0] && (
+        <div
+          className="h-36 w-full bg-cover bg-center"
+          style={{ backgroundImage: `url(${exploration.photos[0]})` }}
+        />
+      )}
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div>

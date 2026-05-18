@@ -14,7 +14,7 @@ export type PlaceReview = {
   typeLabel: string;
   memo: string;
   rating: number;
-  priceRange: string;
+  photos: string[];
 };
 
 export type Exploration = {
@@ -25,6 +25,6 @@ export type Exploration = {
   lineColor: string;
   summaryMemo: string;
   visitedAt: string;
-  coverPhoto: string;
+  photos: string[];
   places: PlaceReview[];
 };

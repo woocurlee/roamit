@@ -91,9 +91,9 @@ export function HomeScreen() {
               className="group flex gap-4 rounded-3xl border border-black/5 bg-white/60 p-4 backdrop-blur-xl dark:border-white/5 dark:bg-[#1e2024]/60"
             >
               <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-black/5 dark:bg-white/5">
-                {e.coverPhoto && (
+                {e.photos[0] && (
                   <img
-                    src={e.coverPhoto}
+                    src={e.photos[0]}
                     alt={e.stationName}
                     className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
                   />
