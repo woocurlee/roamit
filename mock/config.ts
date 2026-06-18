@@ -1,7 +1,7 @@
 import { BookOpen, Coffee, Home, Map, Shuffle, Store, Trees, User, Utensils, Ticket } from "lucide-react";
 import type React from "react";
 
-type IconComponent = React.ComponentType<{ size?: number; className?: string }>;
+type IconComponent = React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>;
 
 export const placeTypes: { key: string; label: string; icon: IconComponent }[] = [
   { key: "restaurant", label: "식당", icon: Utensils },
