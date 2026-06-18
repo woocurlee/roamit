@@ -2,33 +2,33 @@
 
 # CLAUDE.md
 
-## Project Overview
+## 프로젝트 개요
 
-This project is called **Roamit**.
+이 프로젝트의 이름은 **Roamit**입니다.
 
-Roamit is a mobile-first Seoul subway exploration app.
+Roamit은 모바일 우선의 서울 지하철 탐험 앱입니다.
 
-Users:
-- randomly pick subway stations
-- explore nearby neighborhoods
-- create exploration logs
-- add multiple place reviews within a single exploration
+사용자는:
+- 지하철역을 랜덤으로 뽑고
+- 주변 동네를 탐험하며
+- 탐험 로그를 작성하고
+- 하나의 탐험 안에서 여러 장소 리뷰를 추가합니다
 
-The app is NOT:
-- a navigation app
-- a restaurant recommendation platform
-- a social media service
+이 앱은 다음이 **아닙니다**:
+- 네비게이션 앱
+- 음식점 추천 플랫폼
+- 소셜 미디어 서비스
 
-The core experience is:
-- randomness
-- urban exploration
-- emotional travel journaling
-- collecting visited stations
-- lightweight gamification
+핵심 경험:
+- 랜덤성
+- 도시 탐험
+- 감성적인 여행 일기
+- 방문한 역 컬렉팅
+- 가벼운 게임화(gamification)
 
 ---
 
-# Tech Stack
+# 기술 스택
 
 - Next.js App Router
 - React
@@ -37,86 +37,86 @@ The core experience is:
 - shadcn/ui
 - Framer Motion
 
-Future-ready:
+미래 대비:
 - Zustand
 - TanStack Query
 - PostgreSQL
 - Prisma
-- Backend API integration
+- 백엔드 API 연동
 
 ---
 
-# Product Direction
+# 프로덕트 방향성
 
-The application should feel:
-- cinematic
-- modern
-- minimal
-- cozy
-- exploration-focused
+앱은 다음과 같은 느낌이어야 합니다:
+- 시네마틱
+- 모던
+- 미니멀
+- 아늑함
+- 탐험 중심
 
-The UI should resemble:
-- modern travel apps
-- urban exploration journals
-- collection-based mobile apps
+UI는 다음을 닮아야 합니다:
+- 현대적인 여행 앱
+- 도시 탐험 저널
+- 컬렉션 기반 모바일 앱
 
-Avoid:
-- enterprise dashboard UI
-- cluttered layouts
-- food delivery app aesthetics
-- overly colorful gaming UI
-
----
-
-# UX Priorities
-
-Highest priority:
-1. Mobile UX quality
-2. Exploration flow
-3. Emotional engagement
-4. Collection motivation
-5. Fast interaction
-
-Important flow:
-
-Random Station
-→ Start Exploration
-→ Add Place Reviews
-→ Save Exploration
-→ View Exploration History
+다음은 피하세요:
+- 기업용 대시보드 UI
+- 복잡하게 뒤엉킨 레이아웃
+- 배달 앱 느낌의 디자인
+- 지나치게 화려한 게임 UI
 
 ---
 
-# Current MVP Scope
+# UX 우선순위
 
-Implemented or planned:
+가장 높은 우선순위:
+1. 모바일 UX 품질
+2. 탐험 플로우
+3. 감성적 몰입감
+4. 컬렉션 동기부여
+5. 빠른 인터랙션
 
-- Home screen
-- Random station picker
-- Exploration flow
-- Exploration logs
-- Multiple place reviews per exploration
-- Collection/progress screen
-- Profile screen
-- Badge system
-- Mock data architecture
+중요한 플로우:
 
-Not implemented yet:
-- backend APIs
-- authentication
-- GPS verification
-- social features
-- AI recommendations
-- trending systems
-- real map integrations
+랜덤 역 뽑기
+→ 탐험 시작
+→ 장소 리뷰 추가
+→ 탐험 저장
+→ 탐험 기록 보기
 
 ---
 
-# Architecture Goals
+# 현재 MVP 범위
 
-The codebase should be structured for future scalability.
+구현됨 또는 계획됨:
 
-Preferred structure:
+- 홈 화면
+- 랜덤 역 선택기
+- 탐험 플로우
+- 탐험 로그
+- 탐험당 복수 장소 리뷰
+- 컬렉션/진행도 화면
+- 프로필 화면
+- 배지 시스템
+- 목업 데이터 아키텍처
+
+미구현:
+- 백엔드 API
+- 인증
+- GPS 인증
+- 소셜 기능
+- AI 추천
+- 트렌딩 시스템
+- 실제 지도 연동
+
+---
+
+# 아키텍처 목표
+
+코드베이스는 향후 확장성을 고려해 구조화되어야 합니다.
+
+권장 구조:
 
 src/
 features/
@@ -127,14 +127,14 @@ utils/
 types/
 mock/
 
-Avoid:
-- giant single-file components
-- direct mock data usage inside UI
-- tightly coupled state
+다음을 피하세요:
+- 거대한 단일 파일 컴포넌트
+- UI 내부에서 목업 데이터 직접 사용
+- 강하게 결합된 상태 관리
 
-Use service layer abstraction.
+서비스 레이어 추상화를 사용하세요.
 
-Examples:
+예시:
 - getStations()
 - getRandomStation()
 - getExplorations()
@@ -143,16 +143,16 @@ Examples:
 
 ---
 
-# Data Model
+# 데이터 모델
 
-## Station
-A station can serve multiple lines (환승역). `lines` is always a non-empty array.
+## Station (역)
+하나의 역은 여러 노선을 운행할 수 있습니다(환승역). `lines`는 항상 비어있지 않은 배열입니다.
 
 ```
 Station
 - id
 - name
-- lines: StationLine[]   ← one entry per line passing through
+- lines: StationLine[]   ← 해당 역을 지나는 노선별 항목
 - visited
 
 StationLine
@@ -161,15 +161,15 @@ StationLine
 - lineColor
 ```
 
-## Exploration
-Snapshot of a single station visit. `lineName`/`lineColor` are the representative line at the time of recording (first entry of the station's `lines`).
+## Exploration (탐험)
+단일 역 방문의 스냅샷. `lineName`/`lineColor`는 기록 시점의 대표 노선입니다(역의 `lines` 중 첫 번째 항목).
 
 ```
 Exploration
 - id
 - stationId
 - stationName
-- lineName       ← representative line (snapshot)
+- lineName       ← 대표 노선 (스냅샷)
 - lineColor
 - summaryMemo
 - visitedAt
@@ -177,8 +177,8 @@ Exploration
 - places: PlaceReview[]
 ```
 
-## PlaceReview
-One visited location within an exploration.
+## PlaceReview (장소 리뷰)
+탐험 내에서 방문한 하나의 장소.
 
 ```
 PlaceReview
@@ -193,30 +193,30 @@ PlaceReview
 
 ---
 
-# Development Guidelines
+# 개발 가이드라인
 
-- Mobile-first always
-- Keep components small
-- Use reusable UI patterns
-- Use TypeScript types aggressively
-- Prefer composition over large monolithic components
-- Keep animations subtle
-- Preserve visual consistency
-- Maintain dark mode support
+- 항상 모바일 우선
+- 컴포넌트는 작게 유지
+- 재사용 가능한 UI 패턴 사용
+- TypeScript 타입을 적극 활용
+- 거대한 단일 컴포넌트보다 조합(composition) 선호
+- 애니메이션은 절제되게
+- 시각적 일관성 유지
+- 다크 모드 지원 유지
 
 ---
 
-# Important Notes
+# 중요 사항
 
-This MVP should still feel enjoyable even with:
-- no backend
-- no social data
-- no recommendation system
+이 MVP는 다음이 없어도 즐거운 경험을 줄 수 있어야 합니다:
+- 백엔드 없음
+- 소셜 데이터 없음
+- 추천 시스템 없음
 
-The product should work as a personal exploration journal first.
+이 프로덕트는 우선 개인 탐험 일기로서 동작해야 합니다.
 
-Focus on:
-- smooth UX
-- delightful interactions
-- exploration atmosphere
-- low friction logging
+집중할 것:
+- 부드러운 UX
+- 기분 좋은 인터랙션
+- 탐험적 분위기
+- 낮은 마찰의 로깅
