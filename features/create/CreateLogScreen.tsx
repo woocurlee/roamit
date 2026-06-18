@@ -108,36 +108,38 @@ export function CreateLogScreen() {
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold">탐험 기록 작성</h1>
-      <p className="mt-2 text-sm text-slate-500 dark:text-white/55">
-        한 번의 역 탐험 안에 여러 장소 리뷰를 남길 수 있어요.
-      </p>
+    <div className="space-y-4 py-4">
+      <div>
+        <h1 className="text-[22px] font-bold">탐험 기록 작성</h1>
+        <p className="mt-1 text-[14px] text-[#8E8E93]">
+          한 번의 역 탐험 안에 여러 장소 리뷰를 남길 수 있어요.
+        </p>
+      </div>
 
       {/* Exploration card */}
-      <Card className="mt-6 border-black/8 bg-white dark:border-white/10 dark:bg-white/8">
+      <Card className="rounded-3xl border-0 bg-white shadow-sm dark:bg-[#1C1C1E]">
         <CardContent className="p-5">
           {/* Station selector */}
           {isPickingStation ? (
             <div>
-              <p className="mb-3 text-sm font-semibold text-slate-700 dark:text-white/80">탐험할 역 선택</p>
+              <p className="mb-3 text-[14px] font-semibold">탐험할 역 선택</p>
               <div className="relative mb-3">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/35" />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8E8E93]" />
                 <input
                   value={stationQuery}
                   onChange={(e) => setStationQuery(e.target.value)}
                   placeholder="역 이름 검색"
-                  className="h-10 w-full rounded-2xl border border-black/10 bg-black/3 pl-8 pr-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/35"
+                  className="h-10 w-full rounded-2xl bg-[#F2F2F7] pl-8 pr-4 text-[14px] outline-none placeholder:text-[#8E8E93] dark:bg-[#2C2C2E] dark:text-white"
                 />
               </div>
-              <div className="max-h-48 overflow-y-auto rounded-2xl border border-black/8 dark:border-white/10">
+              <div className="max-h-48 overflow-y-auto rounded-2xl bg-[#F2F2F7] dark:bg-[#2C2C2E]">
                 {filteredStations.map((station) => (
                   <button
                     key={station.id}
                     onClick={() => pickStation(station)}
-                    className="flex w-full items-center justify-between px-4 py-3 text-sm transition hover:bg-black/5 dark:hover:bg-white/8 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-black/5 dark:[&:not(:last-child)]:border-white/8"
+                    className="flex w-full items-center justify-between px-4 py-3 text-[14px] transition hover:bg-black/5 dark:hover:bg-white/5 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-black/5 dark:[&:not(:last-child)]:border-white/5"
                   >
-                    <span className="font-medium text-slate-900 dark:text-white">{station.name}역</span>
+                    <span className="font-medium">{station.name}역</span>
                     <div className="flex gap-1">
                       {station.lines.map((l) => (
                         <LineBadge key={l.lineId} lineName={l.lineName} lineColor={l.lineColor} />
@@ -146,13 +148,13 @@ export function CreateLogScreen() {
                   </button>
                 ))}
                 {filteredStations.length === 0 && (
-                  <p className="px-4 py-6 text-center text-sm text-slate-400 dark:text-white/35">검색 결과가 없어요</p>
+                  <p className="px-4 py-6 text-center text-[14px] text-[#8E8E93]">검색 결과가 없어요</p>
                 )}
               </div>
             </div>
           ) : (
             <div className="flex items-center justify-between">
-              <div className="text-lg font-semibold">
+              <div className="text-[16px] font-semibold">
                 {selectedStation ? `${selectedStation.name}역 탐험` : "선택된 역 없음"}
               </div>
               <div className="flex items-center gap-2">
@@ -165,7 +167,7 @@ export function CreateLogScreen() {
                 )}
                 <button
                   onClick={() => setIsPickingStation(true)}
-                  className="flex items-center gap-0.5 rounded-full bg-black/5 px-2.5 py-1.5 text-xs text-slate-500 transition hover:bg-black/10 dark:bg-white/10 dark:text-white/55 dark:hover:bg-white/15"
+                  className="flex items-center gap-0.5 rounded-full bg-[#F2F2F7] px-2.5 py-1.5 text-[12px] text-[#8E8E93] dark:bg-[#2C2C2E]"
                 >
                   변경 <ChevronDown size={12} />
                 </button>
@@ -200,7 +202,7 @@ export function CreateLogScreen() {
                   {explorationPhotos.length < 3 && (
                     <button
                       onClick={() => explorationPhotoRef.current?.click()}
-                      className="flex h-24 w-24 shrink-0 flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-black/15 bg-black/3 text-slate-400 dark:border-white/20 dark:bg-white/5 dark:text-white/40"
+                      className="flex h-24 w-24 shrink-0 flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C7C7CC] bg-[#F2F2F7] text-[#8E8E93] dark:border-[#48484A] dark:bg-[#2C2C2E]"
                     >
                       <Camera size={20} />
                       <span className="text-[11px]">사진 추가</span>
@@ -213,7 +215,7 @@ export function CreateLogScreen() {
                 value={summaryMemo}
                 onChange={(e) => setSummaryMemo(e.target.value)}
                 placeholder="오늘 이 역 근처는 어떤 느낌이었나요?"
-                className="mt-4 h-24 w-full resize-none rounded-3xl border border-black/10 bg-black/3 p-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/35"
+                className="mt-4 h-24 w-full resize-none rounded-2xl bg-[#F2F2F7] p-4 text-[14px] outline-none placeholder:text-[#8E8E93] dark:bg-[#2C2C2E] dark:text-white"
               />
             </>
           )}
@@ -223,12 +225,12 @@ export function CreateLogScreen() {
       {/* Place list + save — only when station is selected */}
       {!isPickingStation && selectedStation && (
         <>
-          <div className="mt-6 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">방문 장소 <span className="text-sm font-normal text-slate-400 dark:text-white/40">{places.length}/5</span></h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-[17px] font-semibold">방문 장소 <span className="text-[13px] font-normal text-[#8E8E93]">{places.length}/5</span></h2>
             {places.length < 5 && (
               <button
                 onClick={addPlace}
-                className="inline-flex items-center gap-1 rounded-full bg-slate-900 px-3 py-2 text-xs font-medium text-white dark:bg-white dark:text-black"
+                className="inline-flex items-center gap-1 rounded-full bg-[#3182F6] px-3 py-2 text-[13px] font-medium text-white"
               >
                 <Plus size={14} /> 장소 추가
               </button>
@@ -246,19 +248,19 @@ export function CreateLogScreen() {
 
           <div className="mt-4 space-y-4">
             {places.map((place, index) => (
-              <Card key={place.id} className="border-black/8 bg-white dark:border-white/10 dark:bg-white/8">
+              <Card key={place.id} className="rounded-3xl border-0 bg-white shadow-sm dark:bg-[#1C1C1E]">
                 <CardContent className="px-5 pb-5">
                   <div className="flex justify-end">
                     <button
                       onClick={() => removePlace(place.id)}
                       disabled={places.length === 1}
-                      className="rounded-full bg-black/5 p-2 text-slate-400 disabled:opacity-30 dark:bg-white/10 dark:text-white/45"
+                      className="rounded-full bg-[#F2F2F7] p-2 text-[#8E8E93] disabled:opacity-30 dark:bg-[#2C2C2E]"
                     >
                       <Trash2 size={15} />
                     </button>
                   </div>
                   <div className="mt-2 flex items-center justify-between">
-                    <div className="text-sm font-semibold text-slate-500 dark:text-white/75">장소 {index + 1}</div>
+                    <div className="text-[13px] font-semibold text-[#8E8E93]">장소 {index + 1}</div>
                     <div className="flex gap-0.5">
                       {[1, 2, 3, 4, 5].map((n) => (
                         <button
@@ -276,7 +278,7 @@ export function CreateLogScreen() {
                     value={place.name}
                     onChange={(e) => updatePlace(place.id, { name: e.target.value })}
                     placeholder="장소명 입력"
-                    className="mt-4 h-12 w-full rounded-2xl border border-black/10 bg-black/3 px-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/35"
+                    className="mt-4 h-12 w-full rounded-2xl bg-[#F2F2F7] px-4 text-[14px] outline-none placeholder:text-[#8E8E93] dark:bg-[#2C2C2E] dark:text-white"
                   />
 
                   <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
@@ -289,8 +291,8 @@ export function CreateLogScreen() {
                           onClick={() => updatePlace(place.id, { type: type.key, typeLabel: type.label })}
                           className={`inline-flex shrink-0 items-center gap-1 rounded-full px-3 py-2 text-xs transition ${
                             active
-                              ? "bg-slate-900 text-white dark:bg-white dark:text-black"
-                              : "bg-black/5 text-slate-600 dark:bg-white/10 dark:text-white/65"
+                              ? "bg-[#3182F6] text-white"
+                              : "bg-[#F2F2F7] text-[#3C3C43] dark:bg-[#2C2C2E] dark:text-white/70"
                           }`}
                         >
                           <Icon size={13} /> {type.label}
@@ -315,7 +317,7 @@ export function CreateLogScreen() {
                     {place.photos.length === 0 && (
                       <button
                         onClick={() => openPlacePhotoPicker(place.id)}
-                        className="flex h-20 w-20 shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-black/15 bg-black/3 text-slate-400 dark:border-white/20 dark:bg-white/5 dark:text-white/40"
+                        className="flex h-20 w-20 shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-[#C7C7CC] bg-[#F2F2F7] text-[#8E8E93] dark:border-[#48484A] dark:bg-[#2C2C2E]"
                       >
                         <ImagePlus size={18} />
                         <span className="text-[10px]">사진</span>
@@ -327,19 +329,19 @@ export function CreateLogScreen() {
                     value={place.memo}
                     onChange={(e) => updatePlace(place.id, { memo: e.target.value })}
                     placeholder="이 장소는 어땠나요?"
-                    className="mt-4 h-24 w-full resize-none rounded-3xl border border-black/10 bg-black/3 p-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-black/30 dark:text-white dark:placeholder:text-white/35"
+                    className="mt-4 h-24 w-full resize-none rounded-2xl bg-[#F2F2F7] p-4 text-[14px] outline-none placeholder:text-[#8E8E93] dark:bg-[#2C2C2E] dark:text-white"
                   />
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          <Button
+          <button
             onClick={save}
-            className="mt-6 h-12 w-full rounded-2xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-white/90"
+            className="mt-4 flex h-12 w-full items-center justify-center rounded-2xl bg-[#3182F6] text-[15px] font-semibold text-white active:opacity-80"
           >
             탐험 기록 저장하기
-          </Button>
+          </button>
         </>
       )}
     </div>

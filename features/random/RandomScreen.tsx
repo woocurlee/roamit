@@ -4,8 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Play, RotateCcw, Train } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { LineBadge } from "@/components/LineBadge";
 import { useApp } from "@/context/AppContext";
 import { filterStations, getRandomStation, getStations } from "@/services/stationService";
@@ -37,78 +35,109 @@ export function RandomScreen() {
     }, 700);
   };
 
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">랜덤 역 뽑기</h1>
-      <p className="mt-2 text-sm text-slate-500 dark:text-white/55">오늘은 어디에서 내려볼까요?</p>
+  const lineOptions = [
+    { value: "all", label: "전체" },
+    { value: "2", label: "2호선" },
+    { value: "4", label: "4호선" },
+    { value: "5", label: "5호선" },
+    { value: "6", label: "6호선" },
+    { value: "G", label: "경의중앙" },
+  ];
 
-      <Card className="mt-6 border-black/8 bg-white dark:border-white/10 dark:bg-white/8">
-        <CardContent className="p-5">
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            {["all", "2", "4", "5", "6", "G"].map((line) => (
+  return (
+    <div className="space-y-4 py-4">
+      <div>
+        <h1 className="text-[22px] font-bold">랜덤 역 뽑기</h1>
+        <p className="mt-1 text-[14px] text-[#8E8E93]">오늘은 어디에서 내려볼까요?</p>
+      </div>
+
+      {/* Filters */}
+      <div className="rounded-2xl bg-white shadow-sm dark:bg-[#1C1C1E]">
+        <div className="p-4">
+          <p className="mb-3 text-[13px] font-semibold text-[#8E8E93]">호선 선택</p>
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {lineOptions.map((opt) => (
               <button
-                key={line}
-                onClick={() => setLineFilter(line)}
-                className={`shrink-0 rounded-full px-4 py-2 text-sm transition ${
-                  lineFilter === line
-                    ? "bg-slate-900 text-white dark:bg-white dark:text-black"
-                    : "bg-black/5 text-slate-600 dark:bg-white/10 dark:text-white/65"
+                key={opt.value}
+                onClick={() => setLineFilter(opt.value)}
+                className={`shrink-0 rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors ${
+                  lineFilter === opt.value
+                    ? "bg-[#3182F6] text-white"
+                    : "bg-[#F2F2F7] text-[#1C1C1E] dark:bg-[#2C2C2E] dark:text-white"
                 }`}
               >
-                {line === "all" ? "전체" : `${line}호선`}
+                {opt.label}
               </button>
             ))}
           </div>
+        </div>
+        <div className="border-t border-[#F2F2F7] px-4 py-3 dark:border-[#38383A]">
           <button
             onClick={() => setExcludeVisited(!excludeVisited)}
-            className="mt-3 rounded-full bg-black/5 px-4 py-2 text-sm text-slate-600 dark:bg-white/10 dark:text-white/70"
+            className="flex w-full items-center justify-between"
           >
-            {excludeVisited ? "방문한 역 제외 중" : "방문한 역 포함"}
-          </button>
-        </CardContent>
-      </Card>
-
-      <Card className="mt-5 overflow-hidden border-black/8 dark:border-white/10 dark:bg-gradient-to-br dark:from-white/12 dark:to-white/5">
-        <CardContent className="p-7 text-center">
-          <motion.div
-            animate={isRolling ? { rotate: 360 } : { rotate: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-black/8 bg-black/5 dark:border-white/10 dark:bg-white/10"
-          >
-            <Train size={34} />
-          </motion.div>
-          <div className="mt-6 text-sm text-slate-400 dark:text-white/50">오늘의 목적지</div>
-          <motion.div
-            key={selectedStation?.id ?? "empty"}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-2 text-4xl font-black tracking-tight"
-          >
-            {isRolling ? "선택 중..." : selectedStation ? `${selectedStation.name}역` : "아직 없음"}
-          </motion.div>
-          {selectedStation && !isRolling && (
-            <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-              {selectedStation.lines.map((l) => (
-                <LineBadge key={l.lineId} lineName={l.lineName} lineColor={l.lineColor} />
-              ))}
+            <span className="text-[14px]">방문한 역 제외</span>
+            <div
+              className={`relative h-6 w-11 rounded-full transition-colors ${
+                excludeVisited ? "bg-[#34C759]" : "bg-[#E5E5EA] dark:bg-[#39393D]"
+              }`}
+            >
+              <div
+                className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${
+                  excludeVisited ? "translate-x-5" : "translate-x-0.5"
+                }`}
+              />
             </div>
-          )}
+          </button>
+        </div>
+      </div>
 
-          <Button
+      {/* Result Card */}
+      <div className="rounded-3xl bg-white px-6 py-8 shadow-sm dark:bg-[#1C1C1E] text-center">
+        <motion.div
+          animate={isRolling ? { rotate: 360 } : { rotate: 0 }}
+          transition={{ duration: 0.7 }}
+          className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F2F2F7] dark:bg-[#2C2C2E]"
+        >
+          <Train size={28} className="text-[#3182F6]" />
+        </motion.div>
+
+        <p className="text-[13px] text-[#8E8E93]">오늘의 목적지</p>
+        <motion.div
+          key={selectedStation?.id ?? "empty"}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 text-[36px] font-black tracking-tight"
+        >
+          {isRolling ? "선택 중..." : selectedStation ? `${selectedStation.name}역` : "아직 없음"}
+        </motion.div>
+
+        {selectedStation && !isRolling && (
+          <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+            {selectedStation.lines.map((l) => (
+              <LineBadge key={l.lineId} lineName={l.lineName} lineColor={l.lineColor} />
+            ))}
+          </div>
+        )}
+
+        <div className="mt-7 flex flex-col gap-2.5">
+          <button
             onClick={pickStation}
-            className="mt-8 h-12 w-full rounded-2xl bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-white/90"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#3182F6] text-[15px] font-semibold text-white active:opacity-80"
           >
-            <RotateCcw className="mr-2" size={18} /> {selectedStation ? "다시 뽑기" : "역 뽑기"}
-          </Button>
-          <Button
+            <RotateCcw size={16} />
+            {selectedStation ? "다시 뽑기" : "역 뽑기"}
+          </button>
+          <button
             disabled={!selectedStation || isRolling}
             onClick={() => router.push("/explore")}
-            className="mt-3 h-12 w-full rounded-2xl bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-40 dark:bg-emerald-400 dark:text-black dark:hover:bg-emerald-300"
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#34C759] text-[15px] font-semibold text-white active:opacity-80 disabled:opacity-35"
           >
-            <Play className="mr-2" size={18} /> 탐험 시작하기
-          </Button>
-        </CardContent>
-      </Card>
+            <Play size={16} />
+            탐험 시작하기
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
