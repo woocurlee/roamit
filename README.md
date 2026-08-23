@@ -11,6 +11,7 @@
 - **Next.js 16** (App Router) · **React 19** · **TypeScript**
 - **Tailwind CSS v4** · **shadcn/ui** (radix-nova)
 - **Framer Motion**
+- **백엔드:** 별도 `roamit-api` 프로젝트의 **NestJS · Prisma · PostgreSQL**
 
 ## 시작하기
 
@@ -49,4 +50,4 @@ app/            # Next.js App Router 진입점
 
 ## 현재 MVP 범위
 
-백엔드 없이 목 데이터로 동작합니다. 인증, GPS 검증, 지도 연동, 소셜 기능은 미구현 상태이며 서비스 레이어를 통해 추후 API로 교체할 수 있는 구조입니다.
+현재 화면 대부분은 목 데이터로 동작하며 서비스 레이어를 통해 API로 전환하는 중입니다. 별도 `roamit-api` 프로젝트에 역 목록/무작위 역 API가 구현되어 있고, 인증과 탐험 기록 API는 구현 예정입니다. GPS 검증, 지도 연동, 소셜 기능은 아직 지원하지 않습니다.

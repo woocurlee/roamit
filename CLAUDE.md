@@ -40,9 +40,12 @@ Roamit은 모바일 우선의 서울 지하철 탐험 앱입니다.
 미래 대비:
 - Zustand
 - TanStack Query
-- PostgreSQL
+
+별도 백엔드 (`../roamit-api`):
+- NestJS
 - Prisma
-- 백엔드 API 연동
+- PostgreSQL
+- Google OAuth2 + JWT (예정)
 
 ---
 
@@ -102,8 +105,7 @@ UI는 다음을 닮아야 합니다:
 - 목업 데이터 아키텍처
 
 미구현:
-- 백엔드 API
-- 인증
+- 인증 및 탐험 기록 API
 - GPS 인증
 - 소셜 기능
 - AI 추천
@@ -209,7 +211,7 @@ PlaceReview
 # 중요 사항
 
 이 MVP는 다음이 없어도 즐거운 경험을 줄 수 있어야 합니다:
-- 백엔드 없음
+- 백엔드 연결 없이도 목 데이터로 실행 가능
 - 소셜 데이터 없음
 - 추천 시스템 없음
 
