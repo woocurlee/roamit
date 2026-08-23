@@ -17,10 +17,13 @@
 
 ```bash
 npm install
+cp .env.example .env.local   # NEXT_PUBLIC_API_URL 등 값 채우기
 npm run dev
 ```
 
-`http://localhost:3000` 에서 확인할 수 있습니다.
+`http://localhost:3001` 에서 확인할 수 있습니다 (백엔드 `roamit-api`가 기본 포트 3000을 사용하므로 프론트는 3001을 사용합니다).
+
+API를 호출하려면 별도로 `roamit-api`를 실행하고, 그 저장소의 `CORS_ORIGIN` 환경변수에 `http://localhost:3001`이 등록되어 있어야 합니다 (기본값에 포함되어 있음).
 
 ## 주요 명령어
 
